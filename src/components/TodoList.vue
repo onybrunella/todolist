@@ -18,15 +18,14 @@
         </select>
       </div>
     </div>
-
-      <div class="task-list-container">
-        <ul>
-          <li v-for="(task, index) in filteredTasks" :key="index" class="task-item">
-            <span :class="{ completed: task.completed }" @click="showTaskDetails(task)">{{ task.name }}</span>
-            <button @click="toggleTaskCompletion(index)" v-if="!task.completed" class="complete-btn">Complete</button>
-          </li>
-        </ul>
-      </div>
+    <div class="task-list-container">
+      <ul>
+        <li v-for="(task, index) in filteredTasks" :key="index" class="task-item">
+          <span :class="{ completed: task.completed }" @click="showTaskDetails(task)">{{ task.name }}</span>
+          <button @click="toggleTaskCompletion(index)" v-if="!task.completed" class="complete-btn">Complete</button>
+        </li>
+      </ul>
+    </div>
 
     <div class="container">
       <div class="input-container">
@@ -48,14 +47,15 @@
       </div>
 
       <div class="task-details" v-if="selectedTask">
-          <h2>{{ selectedTask.name }}</h2>
-          <p>Description: {{ selectedTask.description }}</p>
-          <p>Due Date: {{ selectedTask.dueDate }}</p>
-          <p>Due Time: {{ selectedTask.dueTime }}</p>
-          <p>Priority: {{ selectedTask.priority }}</p>
-          <p>Category: {{ selectedTask.category }}</p>
-          <button @click="closeTaskDetails" class="close-btn">Close</button>
+        <h2>{{ selectedTask.name }}</h2>
+        <p>Description: {{ selectedTask.description }}</p>
+        <p>Due Date: {{ selectedTask.dueDate }}</p>
+        <p>Due Time: {{ selectedTask.dueTime }}</p>
+        <p>Priority: {{ selectedTask.priority }}</p>
+        <p>Category: {{ selectedTask.category }}</p>
+        <button @click="closeTaskDetails" class="close-btn">Close</button>
       </div>
+
       
       <ul>
         <li v-for="(task, index) in tasks" :key="index" class="task-item-actions">
@@ -241,20 +241,37 @@ export default {
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
-#app {
-  font-family: "Quicksand", sans-serif !important;
+@font-face {
+  font-family: "PPHatton-Bold";
+  src: url(../assets/PPHatton-Bold.otf);
+}
+@font-face {
+  font-family: "PPHatton-Ultralight";
+  src: url(../assets/PPHatton-Ultralight.otf);
+}
+
+#app, body,html {
   align-items: center;
   margin-top: 60px;
   display: flex;
   flex-direction: column;
 }
 
-body {
+h1,h2,h3,h4,h5,h6 {
+  font-family: "PPHatton-Bold", sans-serif !important;
+}
+
+p, span, button {
+  font-family: "PPHatton-Ultralight", sans-serif !important;
+  font-size: 16px;
+}
+
+select {
   font-family: "Quicksand", sans-serif !important;
 }
 
 h1 {
-  color: #4a4e69;
+  color: #3E442B;
   margin-bottom: 30px;
   margin-top: -50px;
 }
@@ -275,7 +292,7 @@ h1 {
 .input-container input,
 .input-container select {
   padding: 10px;
-  border: 1px solid #42b983;
+  border: 1px solid #6A7062;
   border-radius: 5px;
   width: calc(50% - 5px);
   box-sizing: border-box;
@@ -284,7 +301,7 @@ h1 {
 .input-container .add-btn {
   padding: 10px 20px;
   border: none;
-  background-color: #42b983;
+  background-color: #6A7062;
   color: white;
   border-radius: 5px;
   cursor: pointer;
@@ -292,7 +309,7 @@ h1 {
 }
 
 .input-container .add-btn:hover {
-  background-color: #36a07e;
+  background-color: #3E442B;
 }
 
 .filters-container {
@@ -308,7 +325,7 @@ h1 {
 .select-container select {
   width: 100%;
   padding: 10px;
-  border: 1px solid #42b983;
+  border: 1px solid #3E442B;
   border-radius: 5px;
   box-sizing: border-box;
 }
@@ -320,7 +337,7 @@ h1 {
 .filter-select {
   padding: 8px 12px;
   border-radius: 5px;
-  border: 1px solid #42b983;
+  border: 1px solid #3E442B;
 }
 
 ul {
@@ -348,7 +365,9 @@ ul {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 10px;
-  background-color: #f9f9f9;
+  background-color: #c7c9c1;
+  color: black;
+  font-weight: bold;
   padding: 10px;
   border-radius: 5px;
   margin-top: 10px;
@@ -380,7 +399,7 @@ ul {
 select {
   padding: 8px 12px;
   border-radius: 5px;
-  border: 1px solid #42b983;
+  border: 1px solid #8D909B;
 }
 
 button {
@@ -448,7 +467,7 @@ ul {
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
-  border: 1px solid #42b983;
+  border: 1px solid #BC6C25;
   border-radius: 5px;
   box-sizing: border-box;
 }
@@ -468,68 +487,16 @@ ul {
 .edit-form button[type="submit"] {
   padding: 10px 20px;
   border: none;
-  background-color: #42b983;
+  background-color: #DDA15E;
   color: white;
   border-radius: 5px;
   cursor: pointer;
 }
 
 .edit-form button[type="submit"]:hover {
-  background-color: #36a07e;
+  background-color: #dd8d32;
 }
 
-.task-details {
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.task-details h2 {
-  color: #42b983;
-  margin-bottom: 10px;
-}
-
-.task-details p {
-  color: #666;
-  margin-bottom: 5px;
-}
-
-.task-details button {
-  padding: 8px 16px;
-  border: none;
-  background-color: #9d4edd;
-  color: white;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-top: 10px;
-}
-
-.task-details button:hover {
-  background-color: #5a189a;
-}
-
-.task-details {
-  margin-top: 10px;
-  background-color: #f0f0f0;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-.task-details h2 {
-  font-size: 20px;
-  margin-bottom: 10px;
-}
-
-.task-details p {
-  margin-bottom: 8px;
-}
-
-.task-details button {
-  width: 100%;
-}
 .filters-container select {
   font-family: "Quicksand", sans-serif !important;
 }
